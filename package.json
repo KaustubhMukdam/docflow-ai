@@ -1,0 +1,12 @@
+{
+  "name": "docflow-ai",
+  "version": "1.0.0",
+  "description": "AI-powered document processing with Motia",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/docflow-ai.git"
+  },
+  "keywords": ["motia", "ai", "document-processing", "hackathon"],
+  "author": "Your Name",
+  "license": "MIT"
+}
