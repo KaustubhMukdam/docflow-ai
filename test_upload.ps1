@@ -21,10 +21,10 @@ $jsonBody = @{
     content = $content
 } | ConvertTo-Json
 
-# Save to temp file to avoid escaping issues
+# Save to temp file
 $jsonBody | Out-File -FilePath temp_request.json -Encoding UTF8
 
-# Upload using file
+# Upload
 $response = curl.exe -s -X POST "http://localhost:3000/api/v1/documents/upload" `
   -H "Content-Type: application/json" `
   -d "@temp_request.json"
@@ -38,7 +38,11 @@ if ($response -match '^\{') {
     if ($responseObj.document_id) {
         $docId = $responseObj.document_id
         
-        Write-Host "`n=== 2. Getting document details ===" -ForegroundColor Cyan
+        # ADDED: Wait for AI processing
+        Write-Host "`n⏳ Waiting 20 seconds for AI processing (Classify → Summarize → Risk Score)..." -ForegroundColor Yellow
+        Start-Sleep -Seconds 20
+        
+        Write-Host "`n=== 2. Getting document details (AFTER processing) ===" -ForegroundColor Cyan
         $getResponse = curl.exe -s "http://localhost:3000/api/v1/documents/$docId"
         Write-Host "Raw GET response: $getResponse"
         
@@ -48,9 +52,6 @@ if ($response -match '^\{') {
             Write-Host "Warning: GET request returned empty or invalid response" -ForegroundColor Yellow
         }
     }
-} else {
-    Write-Host "Error: Response is not JSON" -ForegroundColor Red
-    Write-Host $response
 }
 
 Write-Host "`n=== 3. Listing all documents ===" -ForegroundColor Yellow

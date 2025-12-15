@@ -70,3 +70,6 @@ __pycache__/
 # Backup files
 *.bak
 *.backup
+
+cleanup_test_docs.ps1
+test_upload.ps1

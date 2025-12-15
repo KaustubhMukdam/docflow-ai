@@ -15,9 +15,13 @@ declare module 'motia' {
     'LogGreeting': EventHandler<{ requestId: string; greeting: string; processedBy: string }, never>
     'HelloAPI': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { message: string; status: string; appName: string }>, { topic: 'process-greeting'; data: { timestamp: string; appName: string; greetingPrefix: string; requestId: string } }>
     'UploadDocument': ApiRouteHandler<Record<string, unknown>, ApiResponse<201, { document_id: string; filename: string; status: string; message: string }> | ApiResponse<400, { error: string }> | ApiResponse<500, { error: string }>, { topic: 'document.uploaded'; data: never }>
+    'SummarizeDocument': EventHandler<never, { topic: 'document.summarized'; data: never }>
     'SaveDocument': EventHandler<never, never>
+    'RiskScoreDocument': EventHandler<never, never>
     'ListDocuments': ApiRouteHandler<Record<string, unknown>, unknown, never>
     'GetDocument': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { document_id: string; filename: string; document_type: string; status: string; extracted_text: string | unknown; ai_summary: string | unknown; risk_score: number | unknown; uploaded_at: string; processed_at: string | unknown; reviewer_comments: string | unknown }> | ApiResponse<404, { error: string }>, never>
+    'DeleteDocument': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { message: string; document_id: string }> | ApiResponse<404, { error: string }>, never>
+    'ClassifyDocument': EventHandler<never, { topic: 'document.classified'; data: never }>
     'ProcessGreeting': EventHandler<{ timestamp: string; appName: string; greetingPrefix: string; requestId: string }, { topic: 'greeting-processed'; data: { requestId: string; greeting: string; processedBy: string } }>
   }
     
