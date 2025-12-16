@@ -15,7 +15,8 @@ config = {
     'type': 'event',
     'description': 'Classifies document and extracts key entities using AI',
     'subscribes': ['document.uploaded'],
-    'emits': ['document.classified']
+    'emits': ['document.classified'],
+    'flows': ['document-processing-flow']
 }
 
 async def handler(input_data, context):

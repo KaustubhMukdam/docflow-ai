@@ -1,0 +1,32 @@
+EMPLOYMENT CONTRACT
+
+This Employment Agreement ("Agreement") is entered into as of December 16, 2024
+
+PARTIES:
+Employer: TechVentures Inc., a Delaware corporation
+Employee: Michael Anderson
+
+TERMS:
+Position: Senior Software Engineer
+Start Date: January 1, 2025
+Salary: $150,000 per year
+Benefits: Health insurance, 401(k) matching, stock options
+
+RESPONSIBILITIES:
+- Design and implement software systems
+- Lead development team projects
+- Code review and mentorship
+- Participate in architectural decisions
+
+NON-COMPETE:
+Employee agrees not to work for competitors for 12 months after termination.
+
+CONFIDENTIALITY:
+Employee must maintain confidentiality of proprietary information.
+
+TERMINATION:
+Either party may terminate with 30 days written notice.
+
+SIGNATURES:
+Employer: ___________________ Date: 12/16/2024
+Employee: ___________________ Date: 12/16/2024

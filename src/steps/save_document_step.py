@@ -11,7 +11,8 @@ config = {
     'type': 'event',
     'description': 'Saves uploaded document to database',
     'subscribes': ['document.uploaded'],
-    'emits': []
+    'emits': [],
+    'flows': ['document-processing-flow']
 }
 
 async def handler(input_data, context):
@@ -51,7 +52,9 @@ async def handler(input_data, context):
             document_type=doc_type,
             status=DocumentStatus.UPLOADED,
             file_path=file_path,
-            uploaded_at=datetime.utcnow()
+            uploaded_at=datetime.utcnow(),
+            file_size=input_data.get('file_size'),
+            file_type=input_data.get('file_type') 
         )
         
         # If content was passed, store it as extracted_text for now

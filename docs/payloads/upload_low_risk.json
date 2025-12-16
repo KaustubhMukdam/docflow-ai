@@ -1,0 +1,5 @@
+{
+  "filename": "low_risk_loan.txt",
+  "document_type": "loan_application",
+  "content": "PERSONAL LOAN APPLICATION\n\nApplicant Name: Sarah Johnson\nDate of Birth: 03/15/1985\nSocial Security: XXX-XX-1234\n\nLoan Details:\nLoan Amount: $25,000\nPurpose: Debt Consolidation\nLoan Term: 36 months\n\nFinancial Information:\nAnnual Income: $95,000\nEmployment Status: Full-time Engineer at TechCorp\nYears at Current Job: 5 years\nCredit Score: 780\nDebt-to-Income Ratio: 28%\nExisting Debts: $15,000 (student loans)\n\nAssets:\nHome Ownership: Yes (owned for 8 years)\nSavings: $45,000\nRetirement Accounts: $120,000\n\nI certify that all information provided is accurate and complete.\n\nSignature: Sarah Johnson\nDate: December 16, 2024"
+}

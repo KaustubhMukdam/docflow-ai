@@ -14,7 +14,8 @@ config = {
     'type': 'event',
     'description': 'Generates AI summary of document',
     'subscribes': ['document.classified'],
-    'emits': ['document.summarized']
+    'emits': ['document.summarized'],
+    'flows': ['document-processing-flow']
 }
 
 async def handler(input_data, context):

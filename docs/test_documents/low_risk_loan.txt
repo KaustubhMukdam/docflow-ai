@@ -1,0 +1,28 @@
+PERSONAL LOAN APPLICATION
+
+Applicant Name: Sarah Johnson
+Date of Birth: 03/15/1985
+Social Security: XXX-XX-1234
+
+Loan Details:
+Loan Amount: $25,000
+Purpose: Debt Consolidation
+Loan Term: 36 months
+
+Financial Information:
+Annual Income: $95,000
+Employment Status: Full-time Engineer at TechCorp
+Years at Current Job: 5 years
+Credit Score: 780
+Debt-to-Income Ratio: 28%
+Existing Debts: $15,000 (student loans)
+
+Assets:
+Home Ownership: Yes (owned for 8 years)
+Savings: $45,000
+Retirement Accounts: $120,000
+
+I certify that all information provided is accurate and complete.
+
+Signature: Sarah Johnson
+Date: December 16, 2024

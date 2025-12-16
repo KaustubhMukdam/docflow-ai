@@ -1,0 +1,31 @@
+PERSONAL LOAN APPLICATION
+
+Applicant Name: Unknown Person
+Date of Birth: 01/01/1990
+Social Security: Not Provided
+
+Loan Details:
+Loan Amount: $500,000
+Purpose: Unspecified Business Venture
+Loan Term: 12 months
+
+Financial Information:
+Annual Income: $30,000
+Employment Status: Unemployed (seeking work)
+Years at Current Job: 0 years
+Credit Score: 450
+Debt-to-Income Ratio: 85%
+Existing Debts: $95,000 (credit cards, personal loans)
+
+Assets:
+Home Ownership: No (renting)
+Savings: $500
+Retirement Accounts: $0
+
+WARNING: Multiple red flags detected.
+- Extremely high loan amount relative to income
+- Unemployed with poor credit history
+- Minimal assets and high existing debt
+
+Signature: [Unsigned]
+Date: [Not provided]

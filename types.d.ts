@@ -14,11 +14,15 @@ declare module 'motia' {
   interface Handlers {
     'LogGreeting': EventHandler<{ requestId: string; greeting: string; processedBy: string }, never>
     'HelloAPI': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { message: string; status: string; appName: string }>, { topic: 'process-greeting'; data: { timestamp: string; appName: string; greetingPrefix: string; requestId: string } }>
+    'UploadFile': ApiRouteHandler<Record<string, unknown>, ApiResponse<201, { document_id: string; filename: string; file_type: string; file_size: number; status: string; message: string }> | ApiResponse<400, { error: string }> | ApiResponse<500, { error: string }>, { topic: 'document.uploaded'; data: never }>
     'UploadDocument': ApiRouteHandler<Record<string, unknown>, ApiResponse<201, { document_id: string; filename: string; status: string; message: string }> | ApiResponse<400, { error: string }> | ApiResponse<500, { error: string }>, { topic: 'document.uploaded'; data: never }>
     'SummarizeDocument': EventHandler<never, { topic: 'document.summarized'; data: never }>
     'SaveDocument': EventHandler<never, never>
     'RiskScoreDocument': EventHandler<never, never>
+    'ReviewDocument': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { document_id: string; decision: 'approved' | 'rejected'; message: string }> | ApiResponse<400, { error: string }> | ApiResponse<404, { error: string }>, { topic: 'document.reviewed'; data: never }>
+    'NotifyReview': EventHandler<never, never>
     'ListDocuments': ApiRouteHandler<Record<string, unknown>, unknown, never>
+    'GetPendingReviews': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { documents: Array<{ document_id: string; filename: string; document_type: string; risk_score: number; ai_summary: string | unknown; reviewer_comments: string | unknown; uploaded_at: string; processed_at: string | unknown }>; total: number }>, never>
     'GetDocument': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { document_id: string; filename: string; document_type: string; status: string; extracted_text: string | unknown; ai_summary: string | unknown; risk_score: number | unknown; uploaded_at: string; processed_at: string | unknown; reviewer_comments: string | unknown }> | ApiResponse<404, { error: string }>, never>
     'DeleteDocument': ApiRouteHandler<Record<string, unknown>, ApiResponse<200, { message: string; document_id: string }> | ApiResponse<404, { error: string }>, never>
     'ClassifyDocument': EventHandler<never, { topic: 'document.classified'; data: never }>

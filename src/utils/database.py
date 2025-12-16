@@ -37,6 +37,8 @@ class Document(Base):
     document_type = Column(SQLEnum(DocumentType))
     status = Column(SQLEnum(DocumentStatus), default=DocumentStatus.UPLOADED)
     file_path = Column(String)
+    file_size = Column(Integer, nullable=True)
+    file_type = Column(String, nullable=True)
     
     # AI Processing Results
     extracted_text = Column(Text, nullable=True)

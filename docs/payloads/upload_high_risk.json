@@ -1,0 +1,5 @@
+{
+  "filename": "high_risk_loan.txt",
+  "document_type": "loan_application",
+  "content": "PERSONAL LOAN APPLICATION\n\nApplicant Name: Unknown Person\nDate of Birth: 01/01/1990\nSocial Security: Not Provided\n\nLoan Details:\nLoan Amount: $500,000\nPurpose: Unspecified Business Venture\nLoan Term: 12 months\n\nFinancial Information:\nAnnual Income: $30,000\nEmployment Status: Unemployed (seeking work)\nYears at Current Job: 0 years\nCredit Score: 450\nDebt-to-Income Ratio: 85%\nExisting Debts: $95,000 (credit cards, personal loans)\n\nAssets:\nHome Ownership: No (renting)\nSavings: $500\nRetirement Accounts: $0\n\nWARNING: Multiple red flags detected.\n- Extremely high loan amount relative to income\n- Unemployed with poor credit history\n- Minimal assets and high existing debt\n\nSignature: [Unsigned]\nDate: [Not provided]"
+}

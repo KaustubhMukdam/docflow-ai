@@ -1,0 +1,467 @@
+{
+  "info": {
+    "name": "DocFlow AI - Complete Testing Suite",
+    "description": "AI-powered document processing with Motia framework. Includes automatic classification, summarization, risk scoring, and human-in-the-loop review.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "docflow-ai"
+  },
+  "item": [
+    {
+      "name": "1. Document Upload",
+      "item": [
+        {
+          "name": "Upload Low Risk Loan Application",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has document_id\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('document_id');",
+                  "    pm.environment.set('low_risk_doc_id', jsonData.document_id);",
+                  "});",
+                  "",
+                  "pm.test(\"Status is uploaded\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.eql('uploaded');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"low_risk_loan.txt\",\n  \"document_type\": \"loan_application\",\n  \"content\": \"PERSONAL LOAN APPLICATION\\n\\nApplicant Name: Sarah Johnson\\nDate of Birth: 03/15/1985\\nSocial Security: XXX-XX-1234\\n\\nLoan Details:\\nLoan Amount: $25,000\\nPurpose: Debt Consolidation\\nLoan Term: 36 months\\n\\nFinancial Information:\\nAnnual Income: $95,000\\nEmployment Status: Full-time Engineer at TechCorp\\nYears at Current Job: 5 years\\nCredit Score: 780\\nDebt-to-Income Ratio: 28%\\nExisting Debts: $15,000 (student loans)\\n\\nAssets:\\nHome Ownership: Yes (owned for 8 years)\\nSavings: $45,000\\nRetirement Accounts: $120,000\\n\\nI certify that all information provided is accurate and complete.\\n\\nSignature: Sarah Johnson\\nDate: December 16, 2024\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/upload",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "upload"]
+            },
+            "description": "Upload a low-risk loan application. Expected to be auto-approved with risk score < 70."
+          },
+          "response": []
+        },
+        {
+          "name": "Upload High Risk Loan Application",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has document_id\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('document_id');",
+                  "    pm.environment.set('high_risk_doc_id', jsonData.document_id);",
+                  "});",
+                  "",
+                  "pm.test(\"Status is uploaded\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.eql('uploaded');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"high_risk_loan.txt\",\n  \"document_type\": \"loan_application\",\n  \"content\": \"PERSONAL LOAN APPLICATION\\n\\nApplicant Name: Unknown Person\\nDate of Birth: 01/01/1990\\nSocial Security: Not Provided\\n\\nLoan Details:\\nLoan Amount: $500,000\\nPurpose: Unspecified Business Venture\\nLoan Term: 12 months\\n\\nFinancial Information:\\nAnnual Income: $30,000\\nEmployment Status: Unemployed (seeking work)\\nYears at Current Job: 0 years\\nCredit Score: 450\\nDebt-to-Income Ratio: 85%\\nExisting Debts: $95,000 (credit cards, personal loans)\\n\\nAssets:\\nHome Ownership: No (renting)\\nSavings: $500\\nRetirement Accounts: $0\\n\\nWARNING: Multiple red flags detected.\\n- Extremely high loan amount relative to income\\n- Unemployed with poor credit history\\n- Minimal assets and high existing debt\\n\\nSignature: [Unsigned]\\nDate: [Not provided]\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/upload",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "upload"]
+            },
+            "description": "Upload a high-risk loan application. Expected to require human review with risk score >= 70."
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Legal Contract",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has document_id\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('document_id');",
+                  "    pm.environment.set('contract_doc_id', jsonData.document_id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"employment_contract.txt\",\n  \"document_type\": \"legal_contract\",\n  \"content\": \"EMPLOYMENT CONTRACT\\n\\nThis Employment Agreement is entered into as of December 16, 2024\\n\\nPARTIES:\\nEmployer: TechVentures Inc., a Delaware corporation\\nEmployee: Michael Anderson\\n\\nTERMS:\\nPosition: Senior Software Engineer\\nStart Date: January 1, 2025\\nSalary: $150,000 per year\\nBenefits: Health insurance, 401(k) matching, stock options\\n\\nRESPONSIBILITIES:\\n- Design and implement software systems\\n- Lead development team projects\\n- Code review and mentorship\\n- Participate in architectural decisions\\n\\nNON-COMPETE:\\nEmployee agrees not to work for competitors for 12 months after termination.\\n\\nCONFIDENTIALITY:\\nEmployee must maintain confidentiality of proprietary information.\\n\\nTERMINATION:\\nEither party may terminate with 30 days written notice.\\n\\nSIGNATURES:\\nEmployer: ___________________ Date: 12/16/2024\\nEmployee: ___________________ Date: 12/16/2024\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/upload",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "upload"]
+            },
+            "description": "Upload a legal employment contract for processing."
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Grant Application",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"research_grant.txt\",\n  \"document_type\": \"grant_application\",\n  \"content\": \"RESEARCH GRANT APPLICATION\\n\\nProject Title: AI-Powered Healthcare Diagnostics\\nPrincipal Investigator: Dr. Emily Chen\\nInstitution: University Medical Center\\n\\nFunding Requested: $250,000\\nProject Duration: 24 months\\n\\nABSTRACT:\\nThis research proposes developing a machine learning system for early disease detection using medical imaging. The system will analyze X-rays and CT scans to identify patterns indicative of various conditions.\\n\\nBUDGET BREAKDOWN:\\n- Personnel: $150,000\\n- Equipment: $50,000\\n- Research Materials: $30,000\\n- Travel & Conferences: $20,000\\n\\nEXPECTED OUTCOMES:\\n- Improved diagnostic accuracy\\n- Reduced time to diagnosis\\n- Published research papers\\n- Open-source algorithm release\\n\\nQUALIFICATIONS:\\nDr. Chen has 10+ years experience in medical AI research with 25 published papers.\\n\\nDate: December 16, 2024\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/upload",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "upload"]
+            },
+            "description": "Upload a research grant application."
+          },
+          "response": []
+        }
+      ],
+      "description": "Upload various document types for AI processing."
+    },
+    {
+      "name": "2. Document Retrieval",
+      "item": [
+        {
+          "name": "Get Document by ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has required fields\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('document_id');",
+                  "    pm.expect(jsonData).to.have.property('status');",
+                  "    pm.expect(jsonData).to.have.property('risk_score');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/{{high_risk_doc_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "{{high_risk_doc_id}}"]
+            },
+            "description": "Retrieve a specific document by its ID. Uses the high_risk_doc_id from environment variables."
+          },
+          "response": []
+        },
+        {
+          "name": "List All Documents",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has documents array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('documents');",
+                  "    pm.expect(jsonData.documents).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents"]
+            },
+            "description": "List all documents in the system."
+          },
+          "response": []
+        },
+        {
+          "name": "List Approved Documents",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"All documents are approved\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    jsonData.documents.forEach(function(doc) {",
+                  "        pm.expect(doc.status).to.eql('APPROVED');",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents?status=approved",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "approved"
+                }
+              ]
+            },
+            "description": "List only approved documents."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Pending Reviews",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has documents array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('documents');",
+                  "    pm.expect(jsonData).to.have.property('total');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/pending-review",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "pending-review"]
+            },
+            "description": "Get all documents that require human review (high risk score >= 70)."
+          },
+          "response": []
+        }
+      ],
+      "description": "Retrieve and list documents from the system."
+    },
+    {
+      "name": "3. Human Review (HITL)",
+      "item": [
+        {
+          "name": "Approve Document",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Decision is approved\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.decision).to.eql('approved');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"approve\",\n  \"reviewer_name\": \"John Smith\",\n  \"comments\": \"After thorough review, all criteria are met. Risk factors are acceptable. Approved for processing.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/{{high_risk_doc_id}}/review",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "{{high_risk_doc_id}}", "review"]
+            },
+            "description": "Approve a high-risk document after manual review. Uses the high_risk_doc_id from environment."
+          },
+          "response": []
+        },
+        {
+          "name": "Reject Document",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Decision is rejected\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.decision).to.eql('rejected');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"reject\",\n  \"reviewer_name\": \"Jane Doe\",\n  \"comments\": \"Too many risk factors identified. Insufficient income relative to loan amount. Application denied.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/{{high_risk_doc_id}}/review",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "{{high_risk_doc_id}}", "review"]
+            },
+            "description": "Reject a high-risk document after manual review."
+          },
+          "response": []
+        }
+      ],
+      "description": "Human-in-the-loop review for high-risk documents."
+    },
+    {
+      "name": "4. Document Management",
+      "item": [
+        {
+          "name": "Delete Document",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Delete message returned\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.message).to.include('deleted');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/documents/{{contract_doc_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "documents", "{{contract_doc_id}}"]
+            },
+            "description": "Delete a document from the system."
+          },
+          "response": []
+        }
+      ],
+      "description": "Manage documents in the system."
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

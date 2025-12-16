@@ -1,0 +1,23 @@
+﻿PERSONAL LOAN APPLICATION
+
+Applicant Name: John Smith
+Date of Birth: 01/15/1985
+Social Security Number: XXX-XX-1234
+Address: 123 Main Street, San Francisco, CA 94102
+
+Loan Details:
+- Loan Amount Requested: $50,000
+- Purpose: Home Renovation
+- Employment: Software Engineer at Tech Corp
+- Annual Income: $120,000
+- Years at Current Job: 5 years
+
+Credit History:
+- Credit Score: 750
+- Previous Loans: Auto loan (paid off), Student loan (current)
+- Monthly Debt Obligations: $800
+
+I certify that all information provided is accurate.
+
+Signature: John Smith
+Date: December 15, 2024

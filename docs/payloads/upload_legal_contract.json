@@ -1,0 +1,5 @@
+{
+  "filename": "legal_contract.txt",
+  "document_type": "legal_contract",
+  "content": "EMPLOYMENT CONTRACT\n\nThis Employment Agreement is entered into as of December 16, 2024\n\nPARTIES:\nEmployer: TechVentures Inc., a Delaware corporation\nEmployee: Michael Anderson\n\nTERMS:\nPosition: Senior Software Engineer\nStart Date: January 1, 2025\nSalary: $150,000 per year\nBenefits: Health insurance, 401(k) matching, stock options\n\nRESPONSIBILITIES:\n- Design and implement software systems\n- Lead development team projects\n- Code review and mentorship\n- Participate in architectural decisions\n\nNON-COMPETE:\nEmployee agrees not to work for competitors for 12 months after termination.\n\nCONFIDENTIALITY:\nEmployee must maintain confidentiality of proprietary information.\n\nTERMINATION:\nEither party may terminate with 30 days written notice.\n\nSIGNATURES:\nEmployer: ___________________ Date: 12/16/2024\nEmployee: ___________________ Date: 12/16/2024"
+}

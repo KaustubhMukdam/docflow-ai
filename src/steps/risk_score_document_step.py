@@ -17,7 +17,8 @@ config = {
     'type': 'event',
     'description': 'Calculates risk score and routes document based on risk level',
     'subscribes': ['document.summarized'],
-    'emits': []
+    'emits': [],
+    'flows': ['document-processing-flow']
 }
 
 async def handler(input_data, context):
@@ -111,7 +112,7 @@ Higher score = HIGHER risk (0 = safe, 100 = dangerous). Return ONLY valid JSON."
             if total_score >= 70:  # High risk if score >= 70
                 document.status = DocumentStatus.PENDING_REVIEW
                 document.reviewer_comments = f"⚠️ High risk detected (Score: {total_score}/100, Level: {risk_level}). {', '.join(risk_result.get('concerns', []))}"
-                context.logger.warning(f"⚠️  HIGH RISK DETECTED! Document {document_id} routed to manual review")
+                context.logger.warn(f"⚠️  HIGH RISK DETECTED! Document {document_id} routed to manual review")
             else:
                 document.status = DocumentStatus.APPROVED
                 document.approved_at = datetime.utcnow()
