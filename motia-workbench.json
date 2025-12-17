@@ -19,37 +19,41 @@
   {
     "id": "document-processing-flow",
     "config": {
+      "src\\steps\\upload_file_step.ts": {
+        "x": -243,
+        "y": 243
+      },
       "src\\steps\\upload_document_step.ts": {
-        "x": -263,
-        "y": 134
+        "x": -252,
+        "y": 1
       },
       "src\\steps\\summarize_document_step.py": {
         "x": 912,
         "y": -21
       },
       "src\\steps\\save_document_step.py": {
-        "x": 428,
-        "y": -14
+        "x": 462,
+        "y": -22
       },
       "src\\steps\\risk_score_document_step.py": {
         "x": 1356,
         "y": 240
       },
       "src\\steps\\review_document_step.ts": {
-        "x": -202,
-        "y": -108
+        "x": -255,
+        "y": -184
       },
       "src\\steps\\notify_review_step.py": {
-        "x": 538,
-        "y": 525
+        "x": 878,
+        "y": -176
       },
       "src\\steps\\get_pending_reviews_step.ts": {
-        "x": -278,
-        "y": 333
+        "x": -230,
+        "y": 450
       },
       "src\\steps\\classify_document_step.py": {
-        "x": 452,
-        "y": 211
+        "x": 454,
+        "y": 293
       }
     }
   }
