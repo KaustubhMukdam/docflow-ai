@@ -10,28 +10,29 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy package files
+# Copy package files first
 COPY package*.json ./
-COPY python_modules/requirements.txt ./python_modules/
 
-# Install Node dependencies
-RUN npm install
+# Install Node dependencies (this creates python_modules/)
+RUN npm ci --only=production
 
-# Install Python dependencies
-RUN pip3 install --no-cache-dir -r python_modules/requirements.txt
+# Now python_modules exists, install Python deps
+RUN if [ -f python_modules/requirements.txt ]; then \
+      pip3 install --no-cache-dir -r python_modules/requirements.txt; \
+    fi
 
 # Copy source code
 COPY . .
 
 # Build frontend
 WORKDIR /app/frontend
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 # Back to root
 WORKDIR /app
 
-# Create uploads directory
+# Create temp uploads directory
 RUN mkdir -p /tmp/uploads
 
 # Expose port
