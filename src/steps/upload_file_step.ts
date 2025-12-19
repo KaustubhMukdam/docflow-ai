@@ -79,15 +79,21 @@ export const handler = async (req: any, { emit, logger }: any) => {
     }
 
     // Create directories
-    const uploadsDir = join(process.cwd(), 'uploads');
-    if (!existsSync(uploadsDir)) {
-      mkdirSync(uploadsDir, { recursive: true });
+    // ✅ Use /tmp in production, ./uploads in development
+    const UPLOAD_DIR = process.env.NODE_ENV === 'production' 
+      ? '/tmp/uploads' 
+      : join(process.cwd(), 'uploads');
+
+    // ✅ Ensure directory exists
+    if (!existsSync(UPLOAD_DIR)) {
+      mkdirSync(UPLOAD_DIR, { recursive: true });
     }
+
 
     // Generate document ID and save file
     const documentId = `doc_${randomBytes(6).toString('hex')}`;
     const savedFilename = `${documentId}_${filename}`;
-    const filePath = join(uploadsDir, savedFilename);
+    const filePath = join(UPLOAD_DIR, savedFilename);
     
     try {
       writeFileSync(filePath, fileBuffer);

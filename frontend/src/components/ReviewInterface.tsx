@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getPendingReviews, reviewDocument, getDocument } from '../lib/api';
-import { StatusBadge } from './StatusBadge';
 
 export const ReviewInterface: React.FC = () => {
   const [selectedDocId, setSelectedDocId] = useState<string | null>(null);

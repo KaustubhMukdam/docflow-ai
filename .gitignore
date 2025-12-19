@@ -110,3 +110,6 @@ test_review.ps1
 docs\test_documents
 docs\curl_commands.sh
 docs\DocFlow_AI.postman_collection.json
+
+uploads/*
+!uploads/.gitkeep

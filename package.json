@@ -7,12 +7,19 @@
     "dev": "motia dev",
     "start": "motia start",
     "generate-types": "motia generate-types",
-    "build": "motia build",
+    "build": "cd frontend && npm install && npm run build",
     "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
   },
   "keywords": [
-    "motia"
+    "motia",
+    "document-processing",
+    "ai",
+    "hitl"
   ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "dependencies": {
     "@motiadev/adapter-bullmq-events": "^0.17.6-beta.187",
     "@motiadev/core": "^0.17.6-beta.187",

@@ -1,10 +1,39 @@
-import { defineConfig } from '@motiadev/core'
-import endpointPlugin from '@motiadev/plugin-endpoint/plugin'
-import logsPlugin from '@motiadev/plugin-logs/plugin'
-import observabilityPlugin from '@motiadev/plugin-observability/plugin'
-import statesPlugin from '@motiadev/plugin-states/plugin'
-import bullmqPlugin from '@motiadev/plugin-bullmq/plugin'
+export default {
+  name: 'docflow-ai',
+  version: '1.0.0',
+  
+  steps: {
+    uploadDocument: './src/steps/upload_document_step.ts',
+    uploadFile: './src/steps/upload_file_step.ts',
+    saveDocument: './src/steps/save_document_step.py',
+    classifyDocument: './src/steps/classify_document_step.py',
+    summarizeDocument: './src/steps/summarize_document_step.py',
+    riskScoreDocument: './src/steps/risk_score_document_step.py',
+    getDocument: './src/steps/get_document_step.py',
+    listDocuments: './src/steps/list_documents_step.py',
+    getPendingReviews: './src/steps/get_pending_reviews_step.py',
+    reviewDocument: './src/steps/review_document_step.py',
+    deleteDocument: './src/steps/delete_document_step.py',
+  },
+  
+  flows: {
+    'document-processing-flow': {
+      description: 'AI-powered document processing pipeline',
+      steps: [
+        'uploadDocument',
+        'uploadFile',
+        'saveDocument',
+        'classifyDocument',
+        'summarizeDocument',
+        'riskScoreDocument'
+      ]
+    }
+  },
+  
+  server: {
+    port: parseInt(process.env.PORT || '3000'),
+    host: '0.0.0.0',  // Important for Railway/Render
+    cors: true
+  }
+};
 
-export default defineConfig({
-  plugins: [observabilityPlugin, statesPlugin, endpointPlugin, logsPlugin, bullmqPlugin],
-})
