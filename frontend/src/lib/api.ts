@@ -1,10 +1,7 @@
 import axios from 'axios';
 import type { Document } from '../types';  // Import from types instead
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
-                     (import.meta.env.MODE === 'production' 
-                       ? window.location.origin 
-                       : 'http://localhost:3000');
+const API_BASE_URL = "https://docflow-ai.onrender.com"
 
 export const api = axios.create({
   baseURL: `${API_BASE_URL}/api/v1`,
