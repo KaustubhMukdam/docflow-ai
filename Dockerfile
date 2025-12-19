@@ -1,42 +1,23 @@
-FROM node:18-slim
+# Use Motia's official Docker image (includes Node + Python)
+FROM motiadev/motia:latest
 
-# Install Python and build dependencies
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    python3-dev \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
+# Set working directory
 WORKDIR /app
 
-# Copy package files first
+# Copy package files first (for better caching)
 COPY package*.json ./
 
-# Install Node dependencies (this creates python_modules/)
+# Install Node dependencies
 RUN npm ci --only=production
 
-# Now python_modules exists, install Python deps
-RUN if [ -f python_modules/requirements.txt ]; then \
-      pip3 install --no-cache-dir -r python_modules/requirements.txt; \
-    fi
-
-# Copy source code
+# Copy application code
 COPY . .
 
-# Build frontend
-WORKDIR /app/frontend
-RUN npm ci
-RUN npm run build
+# CRITICAL: Setup Python dependencies for your .py steps
+RUN npx motia@latest install
 
-# Back to root
-WORKDIR /app
-
-# Create temp uploads directory
-RUN mkdir -p /tmp/uploads
-
-# Expose port
+# Expose Motia's default port
 EXPOSE 3000
 
-# Start application
-CMD ["npm", "start"]
+# Start the application
+CMD ["npm", "run", "start"]

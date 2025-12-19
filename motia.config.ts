@@ -32,8 +32,15 @@ export default {
   
   server: {
     port: parseInt(process.env.PORT || '3000'),
-    host: '0.0.0.0',  // Important for Railway/Render
+    host: '0.0.0.0',
     cors: true
+  },
+  
+  // Redis configuration for production
+  redis: {
+    host: process.env.REDIS_HOST || 'localhost',
+    port: parseInt(process.env.REDIS_PORT || '6379'),
+    password: process.env.REDIS_PASSWORD,
+    tls: process.env.REDIS_TLS === 'true' ? {} : undefined,
   }
 };
-
